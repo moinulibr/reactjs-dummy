@@ -3,9 +3,9 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useStateContext } from '../../config/ContextProvider';
 
 const GuestLayout = () => {
-    const {token} = useStateContext();
+    const {accessToken} = useStateContext();
     console.log(localStorage.getItem('ACCESS_TOKEN'));
-    if(token){
+    if(accessToken){
         return <Navigate to="/product"/>
     }
 

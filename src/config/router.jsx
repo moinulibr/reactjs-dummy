@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         children:[
             {
                 path:'product',
-                element:<ProductLayout/>,
+                element: <ProductLayout/>,
                 children:[
                     {
                         path:'list',
@@ -26,11 +26,25 @@ const router = createBrowserRouter([
                     {
                         path:'add',
                         element:<ProductAdd/>
-                    }
+                    },
                 ]
-            }
-        ]
+            },
+        ],
     },
+    /* {
+        path:'product',
+        element: <ProductLayout/>,
+        children:[
+            {
+                path:'list',
+                element:<ProductList/>
+            },
+            {
+                path:'add',
+                element:<ProductAdd/>
+            },
+        ],
+    }, */
     {
         path: '/',
         element: <GuestLayout/>,

@@ -34,3 +34,28 @@ export const AuthMiddlewareContext = ({children}) => {
 };
 
 export const useAuthStateContext = () => useContext(AuthStateContext);
+
+
+//formObj;// {email:'admin@gmail.com',password:'12345678'};
+        /* fetch(base_url+'/login', 
+        {
+            method:'post',
+            'withCredentials':false,
+            mode:'no-cors',
+            headers:{
+            'Access-Control-Allow-Origin' : '*',
+            'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(credentials)
+        })
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            //localStorage.setItem('token',data.token);
+            //console.log(data.message);
+        })   
+        .then(json => console.log(json))   
+        .then(error => console.log(error)); 
+        return 0; */
