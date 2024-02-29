@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
+import { useStateContext } from '../../../config/ContextProvider';
 import { Link, Navigate, Outlet } from 'react-router-dom';
-import { useStateContext } from './config/ContextProvider';
-import Header from './views/private/layouts/Header';
-import LeftNavBar from './views/private/layouts/LeftNavBar';
-import MainContent from './views/private/layouts/MainContent';
-//import { useStateContext } from '../../config/ContextProvider';
 
-
-const App = () => {
+const Header = () => {
     const [loading,setLoading] = useState(false);
     const {user,accessToken,setAccessToken}= useStateContext();
+    
     if(!accessToken){
         return <Navigate to="/login"/>
     }
     
-
+    
     const base_url = import.meta.env.VITE_API_BASE_URL;
     const tokenForLogout = localStorage.getItem('ACCESS_TOKEN') ? localStorage.   getItem('ACCESS_TOKEN') : null; 
 
@@ -50,39 +46,16 @@ const App = () => {
     }
 
     return (
-        <div id='defaultLayout'>
-            
-            {/* <aside>
-                <Link to={'/product/list'} >Product list</Link>
-                <Link to={'/product/add'} >Add Product</Link>
-            </aside> */}
-            <LeftNavBar/>
-
-
-            <div className='content'>
-              <header>
-                <Header/>
-                  {/* <div>
-                      Header
-                  </div>
-                  <div>
-                      User :  {user?.name}
-                      <a href="#" onClick={logout} className='btn-logout'>Logout</a>
-                  </div> */}
-              </header>
-
-              <main>
-                <MainContent/>
-                {/*   {
-                      loading && 
-                      <h4 style={{ marginBottom:'10px',marginTop:'5px','textAlign':'center' }}>Loading...</h4>
-                  }
-              <Outlet/> */}
-              </main>
-            </div>
-            
+        <>
+        <div>
+            Header
         </div>
+        <div>
+            User :  {user?.name}
+            <a href="#" onClick={logout} className='btn-logout'>Logout</a>
+        </div>
+        </>
     );
 };
 
-export default App;
+export default Header;

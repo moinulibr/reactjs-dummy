@@ -6,7 +6,7 @@ const GuestLayout = () => {
     const {accessToken} = useStateContext();
     console.log(localStorage.getItem('ACCESS_TOKEN'));
     if(accessToken){
-        return <Navigate to="/product"/>
+        return <Navigate to="/"/>
     }
 
     return (

@@ -58,7 +58,7 @@ const Login = () => {
         }
     };
     const accessToken = localStorage.getItem('ACCESS_TOKEN');
-    console.log(accessToken);
+    //console.log(accessToken);
     if(accessToken){
         return <Navigate to="/" />
     }

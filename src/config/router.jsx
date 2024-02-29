@@ -9,9 +9,17 @@ import ProductList from '../components/Product/ProductList';
 import ProductAdd from '../components/Product/ProductAdd';
 import Home from '../views/guest/Home';
 import GuestLayout from '../views/guest/GuestLayout';
+import UserLayout from '../views/private/user/UserLayout';
+import UserList from '../components/User/UserList';
+import AddUser from '../components/User/AddUser';
+import ProductEdit from '../components/Product/ProductEdit';
 
 const router = createBrowserRouter([
     {
+        path:'/',
+        element: <Dashboard/>
+    },
+    /* {
         path:'/',
         element: <Dashboard/>,
         children:[
@@ -30,9 +38,23 @@ const router = createBrowserRouter([
                 ]
             },
         ],
+    }, */
+    {
+        path:'/user',
+        element:<UserLayout/>,
+        children:[
+            {
+                path:'list',
+                element:<UserList/>
+            },
+            {
+                path:'add',
+                element:<AddUser/>
+            }
+        ]
     },
-    /* {
-        path:'product',
+    {
+        path:'/product',
         element: <ProductLayout/>,
         children:[
             {
@@ -43,8 +65,12 @@ const router = createBrowserRouter([
                 path:'add',
                 element:<ProductAdd/>
             },
+            {
+                path:'edit/:id',
+                element:<ProductEdit key={'productEdit'}/>
+            }
         ],
-    }, */
+    },
     {
         path: '/',
         element: <GuestLayout/>,
