@@ -1,5 +1,5 @@
 
-import { Navigate, createBrowserRouter } from 'react-router-dom';
+import { Navigate, Route, createBrowserRouter } from 'react-router-dom';
 import Login from '../views/guest/Login';
 import Dashboard from '../views/private/Dashboard';
 import PageNotFound from '../views/PageNotFound';
@@ -13,12 +13,14 @@ import UserLayout from '../views/private/user/UserLayout';
 import UserList from '../components/User/UserList';
 import AddUser from '../components/User/AddUser';
 import ProductEdit from '../components/Product/ProductEdit';
+import TestHome from '../views/private/TestHome';
 
 const router = createBrowserRouter([
     {
         path:'/',
         element: <Dashboard/>
     },
+
     /* {
         path:'/',
         element: <Dashboard/>,
@@ -50,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path:'add',
                 element:<AddUser/>
+            },
+            {
+                path:'edit/:id',
+                element:<AddUser key={'userEdit'}/>
             }
         ]
     },

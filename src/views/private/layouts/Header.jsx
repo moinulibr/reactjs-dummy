@@ -31,7 +31,7 @@ const Header = () => {
                     console.log(json)
                     if(json.success == true){
                         localStorage.removeItem("ACCESS_TOKEN");
-                        console.log(localStorage.getItem('ACCESS_TOKEN'));
+                        //console.log(localStorage.getItem('ACCESS_TOKEN'));
                         setAccessToken(null);
                         setLoading(false);
                     }

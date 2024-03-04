@@ -4,8 +4,11 @@ import Header from '../layouts/Header';
 import { Link, Outlet } from 'react-router-dom';
 import AddUser from '../../../components/User/AddUser';
 import UserList from '../../../components/User/UserList';
+import { useStateContext } from '../../../config/ContextProvider';
 
 const UserLayout = () => {
+    const {user, token, setUser, setToken, notification} = useStateContext();
+
     return (
         <div id='defaultLayout'>
 
@@ -25,6 +28,12 @@ const UserLayout = () => {
                 
 
                 <Outlet/>
+
+                {notification &&
+                    <div className="notification">
+                        {notification}
+                    </div>
+                }
             </main>
         </div>
     

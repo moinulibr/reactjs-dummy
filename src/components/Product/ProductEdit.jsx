@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link,Navigate, json, useNavigate, useParams } from 'react-router-dom';
 import ProductList from './ProductList';
+import { useStateContext } from '../../config/ContextProvider';
 
 const ProductEdit = () => {
+    const {setNotification} = useStateContext();
     const [errorMessage,setErrorMessage] = useState(null);
     const [isLoading,setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -79,8 +81,9 @@ const ProductEdit = () => {
         const jesonResponse = await fetchData.json();
         //console.log(jesonResponse);
         if(jesonResponse.success === true){
-            setIsLoading(false);
             setIsSuccess(true);
+            setIsLoading(false);
+            setNotification('Product updated successfully');
             return navigate('/product/list');
         }
         else if(jesonResponse.success === false){
@@ -110,6 +113,10 @@ const ProductEdit = () => {
             }
             {isLoading &&
                 <h4 style={{ textAlign:'center' }}>Loading...</h4>
+            }
+            
+            { isSuccess &&
+                <h4 style={{ textAlign:'center',color:"green" }}>Product updated successfully</h4>
             }
 
             {productData && 

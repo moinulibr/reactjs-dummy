@@ -2,8 +2,11 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import LeftNavBar from '../layouts/LeftNavBar';
 import Header from '../layouts/Header';
+import { useStateContext } from '../../../config/ContextProvider';
 
 const ProductLayout = () => {
+    const {user, token, setUser, setToken, notification} = useStateContext();
+
     return (
         <div id='defaultLayout'>
 
@@ -22,6 +25,12 @@ const ProductLayout = () => {
                     
                     
                     <Outlet/>
+
+                    {notification &&
+                        <div className="notification">
+                            {notification}
+                        </div>
+                    }
                 </main>
             </div>
         

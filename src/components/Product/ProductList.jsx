@@ -1,17 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Pagination  from './Pagination';
+import { useStateContext } from '../../config/ContextProvider';
 
 //when call function from another js file
 //import productApiHandling, { test } from './productApiHandling';
 
 const ProductList = () => {
+    const {setNotification} = useStateContext();
     const [isLoading,setIsLoading] = useState(false);
+    const [getProductFromApi,setGetProductFromApi] = useState(null);
     const base_url = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate();
     const token = localStorage.getItem('ACCESS_TOKEN') ? localStorage.getItem('ACCESS_TOKEN') : null;
     
+
+    //getProductLists(); //[when i use state to set data, then its render infinity] its a problem
+
+    //if we want to call api from another js file..
+    //const getProductLists = productApiHandling;
+    //console.log(test(4));
+    //const {data} = useQuery({ queryKey: ['products'], queryFn: getProductLists });
     const getProductLists = async () => {
         setIsLoading(true);
         try{
@@ -31,18 +41,18 @@ const ProductList = () => {
             console.log('error- '+ error);
         }
     };
-    //getProductLists(); //[when i use state to set data, then its render infinity] its a problem
-
-    //if we want to call api from another js file..
-    //const getProductLists = productApiHandling;
-    //console.log(test(4));
-    const {data} = useQuery({ queryKey: ['products'], queryFn: getProductLists });
-    /* const getdata = () => {
-        //Queries
-        const {data} = useQuery({ queryKey: ['products'], queryFn: getProductLists });
-        return data;
+    /* const productListsAll = () => {
+        
     };
-    const data = getdata(); */
+    useEffect(()=>{
+        setGetProductFromApi(getProductLists);
+    },[]);
+    console.log(getProductFromApi);
+    const productListForQuery = () => {
+        console.log(getProductFromApi);
+        return getProductFromApi;
+    }; */
+    const {data} = useQuery({ queryKey: ['products'], queryFn: getProductLists });
     //const productList = useQuery({ queryKey: ['products'], queryFn: getProductLists })
     //console.log(productList);//all useQuery response
     //console.log(productList.data);//get targeted data
@@ -71,10 +81,10 @@ const ProductList = () => {
             //console.log(productLists);
             if(productLists.success === true){
                 setIsLoading(false);
+                setNotification('Product successfully deleted');
                //getProductLists();
                 //console.log(productLists);
                 return navigate('/product/list');
-                return <Navigate to={'/prduct/list'}/>
             }
         }catch(error){
             setIsLoading(false)

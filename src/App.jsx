@@ -8,8 +8,9 @@ import MainContent from './views/private/layouts/MainContent';
 
 
 const App = () => {
+    const {user, token, setUser, setToken, notification,accessToken,setAccessToken} = useStateContext();
+    console.log('app :- '+ token);
     const [loading,setLoading] = useState(false);
-    const {user,accessToken,setAccessToken}= useStateContext();
     if(!accessToken){
         return <Navigate to="/login"/>
     }

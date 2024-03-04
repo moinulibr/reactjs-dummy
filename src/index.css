@@ -129,9 +129,10 @@ table > tbody > tr > td {
 
 .notification {
     position: fixed;
+    top:1rem;
     right: 1rem;
-    bottom: 1rem;
-    z-index: 100;
+    /* bottom: 1rem; */
+    z-index: 100000;
     padding: 1rem 1.5rem;
     background-color: #00a762;
     color: white;

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link,Navigate, useNavigate, useParams } from 'react-router-dom';
 import ProductList from './ProductList';
+import { useStateContext } from '../../config/ContextProvider';
 
 const ProductAdd = () => {
+    const {setNotification} = useStateContext();
     const [errorMessage,setErrorMessage] = useState(null);
     const [isLoading,setIsLoading] = useState(false);
+    const [isSuccess,setIsSuccess] = useState(false);
     const navigate = useNavigate();
     //let {id} = useParams();
 
@@ -25,6 +28,7 @@ const ProductAdd = () => {
         setIsLoading(true);
         e.preventDefault();
         setErrorMessage(null);
+        setIsSuccess(false);
         //console.log(formObj);
         const base_url = import.meta.env.VITE_API_BASE_URL;
         const fetchData = await fetch(base_url+'/api/testproducts', 
@@ -39,8 +43,10 @@ const ProductAdd = () => {
         const jesonResponse = await fetchData.json();
         //console.log(jesonResponse);
         if(jesonResponse.success === true){
-            return navigate('/product/list');
+            setIsSuccess(true);
             setIsLoading(false);
+            setNotification('Product created successfully');
+            return navigate('/product/list');
         }
         else if(jesonResponse.success === false){
             //console.log(jesonResponse.errors);
@@ -70,7 +76,10 @@ const ProductAdd = () => {
             {isLoading &&
                 <h4 style={{ textAlign:'center' }}>Loading...</h4>
             }
-
+            
+            { isSuccess &&
+                <h4 style={{ textAlign:'center',color:"green" }}>Product created successfully</h4>
+            }
 
             <form onSubmit={formSubmit}>
                 <div> 
