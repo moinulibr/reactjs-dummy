@@ -8,16 +8,26 @@ import Pagination from '../Product/Pagination';
 //import productApiHandling, { test } from './productApiHandling';
 
 const UserList = () => {
-    const {id} = useParams();
     const {setNotification} = useStateContext();
     const [isLoading,setIsLoading] = useState(false);
-    const base_url = import.meta.env.VITE_API_BASE_URL;
-    const navigate = useNavigate();
     const [userList, setUserList] = useState([]);
     const [userMeta, setUserMeta] = useState([]);
+    
+    const base_url = import.meta.env.VITE_API_BASE_URL;
+    
+    const {id} = useParams();
+    const navigate = useNavigate();
+
     const token = localStorage.getItem('ACCESS_TOKEN') ? localStorage.getItem('ACCESS_TOKEN') : null;
     
     const [currentURL, setCurrentURL] = useState(`${base_url}/api/users`);
+
+    
+    useEffect(()=>{
+        userLists(currentURL);
+    },[]);
+
+
 
     const handlePaginationUrl = (newUrl) => {
         //setCurrentURL(`${base_url}/api/users?page=${pageNo}`);
@@ -48,10 +58,6 @@ const UserList = () => {
             console.log('error- '+ error);
         }
     };
-
-    useEffect(()=>{
-        userLists(currentURL);
-    },[]);
 
 
     const deleteItem = async (userData) => {
@@ -156,6 +162,7 @@ const UserList = () => {
                 
                 })
             }
+
 
                 {/* userList?.length > 0 &&
                 (
